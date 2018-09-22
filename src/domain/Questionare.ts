@@ -1,6 +1,7 @@
 import { Question, QuestionId, AnswerId } from './Question';
 import { CandidateQuestionare } from './CandidateQuestionare';
 import { UserAnswer } from './UserAnswer';
+import { NearestCandidateAlgo, CandidateMatch } from './nearestcandidate/NearestCandidate';
 
 export class Questionare {
     private questions: Question[];
@@ -35,6 +36,10 @@ export class Questionare {
 
     get finished(): boolean {
         return this.userAnswers.size == this.questions.length;
+    }
+
+    public matchCandidates(algo: NearestCandidateAlgo): CandidateMatch[] {
+        return algo.match(this.candidatesQuestionaries, Array.from(this.userAnswers.values()));
     }
 
     private checkIfQuestionExists(questionId: QuestionId) {
