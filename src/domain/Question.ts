@@ -8,6 +8,29 @@ export class Question {
 
     constructor(id: QuestionId,
         text: string,
+        description: string,
+        answers: Answer[]) {
+        this.id = id;
+        this.text = text;
+        this.description = description;
+        this.answers = answers;
+    }
+}
+
+export class QuestionId extends GenericId<string> {
+
+    public static of(value: string): QuestionId {
+        return new QuestionId(value);
+    }
+}
+
+export class Answer {
+    readonly id: AnswerId;
+    readonly text: string;
+    readonly description: string;
+    
+    constructor(id: AnswerId,
+        text: string,
         description: string) {
         this.id = id;
         this.text = text;
@@ -15,14 +38,9 @@ export class Question {
     }
 }
 
-export class QuestionId extends GenericId<string> {
-}
-
-export class Answer {
-    readonly id: AnswerId;
-    readonly text: string;
-    readonly description: string;
-}
-
 export class AnswerId extends GenericId<string> {
+
+    public static of(value: string): AnswerId {
+        return new AnswerId(value);
+    }
 }

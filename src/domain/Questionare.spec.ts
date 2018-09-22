@@ -1,19 +1,17 @@
-import { CandidateQuestionare } from "./CandidateQuestionare";
 import { Questionare } from "./Questionare";
-import { QuestionId, AnswerId, Question } from "./Question";
-import { UserAnswer } from "./UserAnswer";
+import { userAnswer } from "test/fixtures/UserAnswerFactory"
+import { data as fixtureQuestions } from "test/fixtures/dataset/QuestionsDataset";
+import { data as fixtureCandidatesQuestionaries } from "test/fixtures/dataset/CandidateQuestionariesDataset";
 
 describe('Questionare usecase', () => {
     let questionare: Questionare;
 
     beforeEach(() => {
-        let questions = [new Question(new QuestionId("Q1"))];
-        let candidatesQuestionaries = [new CandidateQuestionare()];
-        questionare = new Questionare(questions, candidatesQuestionaries);
+        questionare = new Questionare(fixtureQuestions, fixtureCandidatesQuestionaries);
     });
 
     it('questionare is created as unfinished', () => {
-        expect(questionare.finished).toBe(false);
+        expect(questionare.finished).toBeFalsy();
     });
     
     it('questionare is created with no answers', () => {
@@ -21,17 +19,74 @@ describe('Questionare usecase', () => {
     });
     
     it('user can answer the question', () => {
-        let q1 = new QuestionId("Q1");
-        let a1 = new AnswerId("A1");
-        questionare.userAnswer(new UserAnswer(q1, a1));
+        // given
+        let theAnswer = userAnswer("Q1", "A1");
+        
+        // when
+        questionare.userAnswer(theAnswer);
 
-        expect(questionare.answeredQuestions).toContain(q1);
+        // then
+        expect(questionare.answeredQuestions.length).toBe(1);
+    });
+
+    it('user can reset the questionare', () => {
+        // given
+        let theAnswer = userAnswer("Q1", "A1");
+        
+        // when
+        questionare.userAnswer(theAnswer);
+        questionare.reset();
+
+        // then
+        expect(questionare.answeredQuestions.length).toBe(0);
+    });
+
+    it('questionare is not finished when user not answered all questions', () => {
+        // given
+        let theAnswer = userAnswer("Q1", "A1");
+        
+        // when
+        questionare.userAnswer(theAnswer);
+
+        // then
+        expect(questionare.finished).toBeFalsy();
+    });
+
+    it('questionare is finished when user answered all questions', () => {
+        // given & when
+        questionare.userAnswer(userAnswer("Q1", "A1"));
+        questionare.userAnswer(userAnswer("Q2", "A1"));
+        questionare.userAnswer(userAnswer("Q3", "A1"));
+
+        // then
+        expect(questionare.finished).toBeTruthy();
     });
 
     it('user cannot answer an inexisting question', () => {
-        let q1 = new QuestionId("Inexisting Q1");
-        let a1 = new AnswerId("A1");
+        // given
+        let theAnswer = userAnswer("An inexisting quetion QX", "A1");
 
-        expect(() => questionare.userAnswer(new UserAnswer(q1, a1))).toThrow("Given question does not exists.");
+        // when and then
+        expect(() => questionare.userAnswer(theAnswer)).toThrow("Given question does not exists.");
+    });
+
+    it('user cannot answer an inexisting answer', () => {
+        // given
+        let theAnswer = userAnswer("Q1", "An inexisting answer AX");
+
+        // when and then
+        expect(() => questionare.userAnswer(theAnswer)).toThrow("Given answer does not exists.");
+    });
+
+    it('return ids of user answered question', () => {
+        // given
+        let theAnswer = userAnswer("Q1", "A1");
+        
+        // when
+        questionare.userAnswer(theAnswer);
+
+        // then
+        expect(questionare.answeredQuestions.length).toBe(1);
+        expect(questionare.answeredQuestions.map(id => id.value)).toContain("Q1");
     });
 });

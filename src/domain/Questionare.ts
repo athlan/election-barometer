@@ -22,6 +22,9 @@ export class Questionare {
         if(!this.checkIfQuestionExists(userAnswer.questionId)) {
             throw "Given question does not exists.";
         }
+        if(!this.checkIfAnswerExists(userAnswer.questionId, userAnswer.answerId)) {
+            throw "Given answer does not exists.";
+        }
 
         this.userAnswers.set(userAnswer.questionId, userAnswer);
     }
@@ -35,6 +38,13 @@ export class Questionare {
     }
 
     private checkIfQuestionExists(questionId: QuestionId) {
-        return this.questions.filter(q => q.id.equals(questionId)).length > 0;
+        return this.questions.find(q => q.id.equals(questionId)) !== undefined;
+    }
+
+    private checkIfAnswerExists(questionId: QuestionId, answerId: AnswerId) {
+        return this.questions
+            .find(q => q.id.equals(questionId))
+            .answers
+            .find(a => a.id.equals(answerId)) !== undefined
     }
 }

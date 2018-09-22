@@ -1,7 +1,7 @@
 export abstract class GenericId<T> {
     readonly value: T;
 
-    constructor(value: T) {
+    protected constructor(value: T) {
         this.value = value;
     }
 

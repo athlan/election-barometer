@@ -7,4 +7,8 @@ export class Candidate {
 }
 
 export class CandidateId extends GenericId<string> {
+
+    public static of(value: string): CandidateId {
+        return new CandidateId(value);
+    }
 }
