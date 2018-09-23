@@ -25,3 +25,15 @@ export class CandidateAnswer {
         this.answer = answer;
     }
 }
+
+export function questionareByCandidate(candidateId: CandidateId) {
+    return (q: CandidateQuestionare) => q.candidateId.equals(candidateId);
+}
+
+export function answerForQuestion(questionId: QuestionId) {
+    return (a: CandidateAnswer) => a.questionId.equals(questionId);
+}
+
+export function answerAs(answerId: AnswerId) {
+    return (a: CandidateAnswer) => a.answerId.equals(answerId);
+}
