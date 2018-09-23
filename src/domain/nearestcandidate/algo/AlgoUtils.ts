@@ -52,3 +52,7 @@ export class AlgoContext {
         return result;
     }
 }
+
+export const sortCandidateMatchByResult = function (a, b: CandidateMatch) {
+    return b.match - a.match;
+}

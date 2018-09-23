@@ -1,7 +1,7 @@
 import { data as fixtureCandidatesQuestionaries } from "test/fixtures/dataset/CandidateQuestionariesDataset";
 import { matchByCandidateId } from "../NearestCandidate";
 import { CandidateId } from "../../Candidate";
-import { AlgoContext } from "./AlgoUtils";
+import { AlgoContext, sortCandidateMatchByResult } from "./AlgoUtils";
 
 describe('AlgoUtils spec', () => {
     const ANY_NUMBER_OF_ANSWERS = 3;
@@ -93,7 +93,7 @@ describe('AlgoUtils spec', () => {
             .match).toBe((1.0 + 2.0) / ANY_NUMBER_OF_ANSWERS);
     });
 
-    it('result is sorted having the greatest match first', () => {
+    it('sortCandidateMatchByResult test', () => {
         // given
         let questionaries = fixtureCandidatesQuestionaries;
         let theCandidate1 = CandidateId.of("Candidate 1");
@@ -110,10 +110,11 @@ describe('AlgoUtils spec', () => {
         ctx.numberOfAnswers(3);
 
         let matches = ctx.buildMatches();
+        let sortedMatches = matches.sort(sortCandidateMatchByResult);
 
         // then
-        expect(matches[0].candidateId.equals(theCandidate2)).toBeTruthy();
-        expect(matches[1].candidateId.equals(theCandidate1)).toBeTruthy();
-        expect(matches[2].candidateId.equals(theCandidate3)).toBeTruthy();
+        expect(sortedMatches[0].candidateId.equals(theCandidate2)).toBeTruthy();
+        expect(sortedMatches[1].candidateId.equals(theCandidate1)).toBeTruthy();
+        expect(sortedMatches[2].candidateId.equals(theCandidate3)).toBeTruthy();
     });
 });
