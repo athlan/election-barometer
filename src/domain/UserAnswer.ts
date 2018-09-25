@@ -10,3 +10,7 @@ export class UserAnswer {
         this.answerId = answerId;
     }
 }
+
+export function answerForQuestion(questionId: QuestionId) {
+    return (a: UserAnswer) => a.questionId.equals(questionId);
+}

@@ -30,6 +30,10 @@ export class Questionare {
         this.userAnswers.set(userAnswer.questionId, userAnswer);
     }
 
+    get answers(): UserAnswer[] {
+        return Array.from(this.userAnswers.values());
+    }
+
     get answeredQuestions(): QuestionId[] {
         return Array.from(this.userAnswers.keys());
     }

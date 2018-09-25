@@ -1,0 +1,35 @@
+<div class="question">
+    <h2 class="questionText">{{ question.text }}</h2>
+
+    <ul class="questionAnswers">
+      <li *ngFor="let answer of question.answers">
+        <label>
+          <input type="radio" name="answer" value="{{ answer.id }}"
+            (change)="doAnswerPickup(answer.id)"/>
+          {{ answer.text }} {{ answer.id.value }} <span *ngIf="selectedAnswerId">id: {{selectedAnswerId.value}}</span>
+        </label>
+      </li>
+    </ul>
+
+    <!-- selectedAnswerId != null && selectedAnswerId.equals(answer.id) -->
+    <span *ngIf="selectedAnswerId">id: {{selectedAnswerId.value}}</span>
+    
+    
+    <p *ngIf="prevQuestion">
+      <button routerLink="/{{ survey.id }}/q/{{ prevQuestion.id.value }}">Poprzednie pytanie</button>
+    </p>
+    
+    <p *ngIf="!prevQuestion">
+      <button routerLink="/{{ survey.id }}">Wróć</button>
+    </p>
+    
+    <p *ngIf="nextQuestion">
+      <button (click)="doAnswer()" routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}" [disabled]="!selectedAnswerId">Odpowiedz</button>
+      <button routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}">Pomiń</button>
+    </p>
+    <p *ngIf="!nextQuestion">
+      <button (click)="doAnswer()" routerLink="/{{ survey.id }}/finalize" [disabled]="!selectedAnswerId">Odpowiedz</button>
+      <button routerLink="/{{ survey.id }}/finalize">Pomiń</button>
+    </p>
+    
+</div>

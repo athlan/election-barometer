@@ -44,3 +44,7 @@ export class AnswerId extends GenericId<string> {
         return new AnswerId(value);
     }
 }
+
+export function questionById(questionId: QuestionId) {
+    return (q: Question) => q.id.equals(questionId);
+}

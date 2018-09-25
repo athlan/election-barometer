@@ -1,0 +1,24 @@
+<div class="survey">
+  <div *ngIf="!survey">
+    Loading...
+  </div>
+
+  <div *ngIf="survey">
+    <h1 class="surveyTitle">{{ survey.title }}</h1>
+
+    <div class="lets-start">
+      <button *ngIf="!isQuetionOpened" routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}">Zaczynamy</button>
+    </div>
+
+    <ul *ngIf="isQuetionOpened">
+      <li *ngFor="let question of survey.questions; let i = index">
+        <a routerLink="/{{ survey.id }}/q/{{ question.id.value }}">
+          {{ i + 1 }}
+          <span *ngIf="isQuestionAnswered(question.id)">(answered)</span>
+        </a>
+      </li>
+    </ul>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>
