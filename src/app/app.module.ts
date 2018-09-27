@@ -4,13 +4,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SurveyComponent } from './survey/survey.component';
-import { QuestionComponent } from './question/question.component';
+import { SurveyQuestionComponent } from './survey-question/survey-question.component';
+import { SurveyResultsComponent } from './survey-results/survey-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SurveyComponent,
-    QuestionComponent
+    SurveyQuestionComponent,
+    SurveyResultsComponent
   ],
   imports: [
     BrowserModule,

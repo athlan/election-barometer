@@ -7,11 +7,11 @@ import { Questionare } from '../../domain/Questionare';
 import { UserAnswer, answerForQuestion } from '../../domain/UserAnswer';
 
 @Component({
-  selector: 'app-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  selector: 'app-survey-question',
+  templateUrl: './survey-question.component.html',
+  styleUrls: ['./survey-question.component.scss']
 })
-export class QuestionComponent implements OnInit {
+export class SurveyQuestionComponent implements OnInit {
 
   survey: Survey;
   question: Question;
@@ -54,6 +54,7 @@ export class QuestionComponent implements OnInit {
 
   public doAnswer() {
     this.questionare.userAnswer(new UserAnswer(this.question.id, this.selectedAnswerId));
+    this.surveyService.saveAnswers();
   }
 
   get nextQuestion(): Question {

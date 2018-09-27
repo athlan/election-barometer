@@ -36,6 +36,7 @@ export class SurveyComponent implements OnInit {
       .then((survey) => {
         this.survey = survey;
         this.questionare = this.surveyService.getQuestionare();
+        this.surveyService.loadAnswers();
       })
   }
 

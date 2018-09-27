@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SurveyComponent } from './survey/survey.component';
-import { QuestionComponent } from './question/question.component';
+import { SurveyQuestionComponent } from './survey-question/survey-question.component';
+import { SurveyResultsComponent } from './survey-results/survey-results.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,11 @@ const routes: Routes = [
     children: [
       {
         path: 'q/:questionId',
-        component: QuestionComponent
+        component: SurveyQuestionComponent
+      },
+      {
+        path: 'r',
+        component: SurveyResultsComponent
       }
     ]
   },

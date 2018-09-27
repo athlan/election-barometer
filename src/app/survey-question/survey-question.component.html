@@ -5,16 +5,14 @@
       <li *ngFor="let answer of question.answers">
         <label>
           <input type="radio" name="answer" value="{{ answer.id }}"
-            (change)="doAnswerPickup(answer.id)"/>
-          {{ answer.text }} {{ answer.id.value }} <span *ngIf="selectedAnswerId">id: {{selectedAnswerId.value}}</span>
+            (change)="doAnswerPickup(answer.id)"
+            [checked]="answer.id.equals(selectedAnswerId)"
+            />
+          {{ answer.text }}
         </label>
       </li>
     </ul>
 
-    <!-- selectedAnswerId != null && selectedAnswerId.equals(answer.id) -->
-    <span *ngIf="selectedAnswerId">id: {{selectedAnswerId.value}}</span>
-    
-    
     <p *ngIf="prevQuestion">
       <button routerLink="/{{ survey.id }}/q/{{ prevQuestion.id.value }}">Poprzednie pytanie</button>
     </p>
@@ -28,8 +26,8 @@
       <button routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}">Pomiń</button>
     </p>
     <p *ngIf="!nextQuestion">
-      <button (click)="doAnswer()" routerLink="/{{ survey.id }}/finalize" [disabled]="!selectedAnswerId">Odpowiedz</button>
-      <button routerLink="/{{ survey.id }}/finalize">Pomiń</button>
+      <button (click)="doAnswer()" routerLink="/{{ survey.id }}/r" [disabled]="!selectedAnswerId">Odpowiedz</button>
+      <button routerLink="/{{ survey.id }}/r">Pomiń</button>
     </p>
     
 </div>
