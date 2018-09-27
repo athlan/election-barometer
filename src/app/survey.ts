@@ -5,7 +5,7 @@ import { CandidateQuestionare } from "../domain/CandidateQuestionare";
 export class Survey {
 
     public constructor(
-        readonly id: string;
+        readonly id: string,
         readonly title: string,
         
         readonly textIntroduction: string,
