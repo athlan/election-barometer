@@ -1,5 +1,47 @@
 <p>
   survey-results works!
-
-  {{ hasUnansweredQuestions }}
 </p>
+
+<div class="matches">
+
+  <div *ngIf="!presentReport && hasUnansweredQuestions">
+    <h2>Nie odpowiedziano na wszystkie pytania</h2>
+
+    <p>
+      Nie udzielono odpowiedzi na wszystkie pytania. Zachęcamy do uzupełnienia wszystkich odpowiedzi.
+    </p>
+
+    <button (click)="doUnansweredQuestionsIgnore()">Pokaż raport mimo to</button>
+  </div>
+
+  <div *ngIf="presentReport">
+    <h2>Twoim poglądom najbardziej odpowiadają</h2>
+
+    <ol class="matches">
+      <li *ngFor="let match of matches">
+        {{ match.candidate.name }}
+        {{ match.candidate.description }}
+        {{ match.match * 100 | number: '0.0-2' }}%
+      </li>
+    </ol>
+
+    <h2>Szczegółowe wyniki</h2>
+
+    <p>
+      Poniżej prezentujemy szczegółowe wyniki wpływające na rekomendację. Twoja opinia jest porównana z opiniami kandydatów.
+    </p>
+
+    <p>
+      Jeżeli uważasz, że pewna kwestia ma dla Ciebie bardziej kluczowe znaczenie, możesz zmienić swoją odpowiedź i sprawdzić raport ponownie.
+    </p>
+
+    <table class="detailedMatches">
+      <thead>
+        <tr>
+          <th></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+</div>

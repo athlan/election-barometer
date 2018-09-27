@@ -7,6 +7,7 @@ import { data as fixtureCandidatesQuestionaries } from "test/fixtures/dataset/Ca
 import { Questionare } from '../domain/Questionare';
 import { UserAnswersSnapshot } from './user-answers/user-answers-repository.service';
 import { LocalStorageRepository } from './user-answers/localstorage-repository.service';
+import { Candidate, CandidateId } from '../domain/Candidate';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,11 @@ export class SurveyService {
         let textCompletion = "completion";
 
         let questions = fixtureQuestions;
-        let candidates = [];
+        let candidates = [
+          new Candidate(CandidateId.of("Candidate 1"), "Candidate 1", "Candidate 1"),
+          new Candidate(CandidateId.of("Candidate 2"), "Candidate 2", "Candidate 2"),
+          new Candidate(CandidateId.of("Candidate 3"), "Candidate 3", "Candidate 3"),
+        ];
         let candidateQuestionare = fixtureCandidatesQuestionaries;
 
         console.log("Loading remote data... %s", surveyId)

@@ -1,9 +1,10 @@
 import { GenericId } from "./Id";
 
 export class Candidate {
-    readonly id: CandidateId;
-    readonly name: string;
-    readonly description: string;
+    
+    constructor(readonly id: CandidateId,
+        readonly name: string,
+        readonly description: string) {}
 }
 
 export class CandidateId extends GenericId<string> {
@@ -11,4 +12,8 @@ export class CandidateId extends GenericId<string> {
     public static of(value: string): CandidateId {
         return new CandidateId(value);
     }
+}
+
+export function candidateById(candidateId: CandidateId) {
+    return (q: Candidate) => q.id.equals(candidateId);
 }
