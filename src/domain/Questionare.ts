@@ -1,22 +1,22 @@
 import { Question, QuestionId, AnswerId } from './Question';
-import { CandidateQuestionare } from './CandidateQuestionare';
+import { CandidateQuestionare, answerForQuestion } from './CandidateQuestionare';
 import { UserAnswer } from './UserAnswer';
 import { NearestCandidateAlgo, CandidateMatch } from './nearestcandidate/NearestCandidate';
 
 export class Questionare {
     private questions: Question[];
     private candidatesQuestionaries: CandidateQuestionare[];
-    private userAnswers: Map<QuestionId, UserAnswer>;
+    private userAnswers: UserAnswer[];
 
     public constructor(questions: Question[],
         candidatesQuestionaries: CandidateQuestionare[]) {
         this.questions = questions;
         this.candidatesQuestionaries = candidatesQuestionaries;
-        this.userAnswers = new Map;
+        this.userAnswers = [];
     }
 
     public reset() {
-        this.userAnswers.clear();
+        this.userAnswers = [];
     }
 
     public userAnswer(userAnswer: UserAnswer) {
@@ -27,7 +27,14 @@ export class Questionare {
             throw "Given answer does not exists.";
         }
 
-        this.userAnswers.set(userAnswer.questionId, userAnswer);
+        let foundAnswerIdx = this.userAnswers.findIndex(answerForQuestion(userAnswer.questionId));
+
+        if(foundAnswerIdx != -1) {
+            this.userAnswers[foundAnswerIdx] = userAnswer;
+        }
+        else {
+            this.userAnswers.push(userAnswer);
+        }
     }
 
     get answers(): UserAnswer[] {
@@ -35,11 +42,11 @@ export class Questionare {
     }
 
     get answeredQuestions(): QuestionId[] {
-        return Array.from(this.userAnswers.keys());
+        return this.userAnswers.map(a => a.questionId);
     }
 
     get finished(): boolean {
-        return this.userAnswers.size == this.questions.length;
+        return this.userAnswers.length == this.questions.length;
     }
 
     public matchCandidates(algo: NearestCandidateAlgo): CandidateMatch[] {

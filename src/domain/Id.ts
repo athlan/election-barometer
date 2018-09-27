@@ -6,6 +6,6 @@ export abstract class GenericId<T> {
     }
 
     public equals(other: GenericId<T>): boolean {
-        return this.value == other.value;
+        return other && this.value == other.value;
     }
 }
