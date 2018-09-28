@@ -9,7 +9,7 @@ import { UserAnswer, answerForQuestion } from '../../domain/UserAnswer';
 @Component({
   selector: 'app-survey-question',
   templateUrl: './survey-question.component.html',
-  styleUrls: ['./survey-question.component.scss']
+  styleUrls: ['./survey-question.component.scss'],
 })
 export class SurveyQuestionComponent implements OnInit {
 

@@ -1,33 +1,54 @@
-<div class="question">
-    <h2 class="questionText">{{ question.text }}</h2>
+<mat-card>
+    <mat-card-title>
+      {{ question.text }}
+    </mat-card-title>
 
-    <ul class="questionAnswers">
-      <li *ngFor="let answer of question.answers">
-        <label>
-          <input type="radio" name="answer" value="{{ answer.id }}"
-            (change)="doAnswerPickup(answer.id)"
-            [checked]="answer.id.equals(selectedAnswerId)"
-            />
+    <mat-card-content>
+      
+      <p *ngFor="let answer of question.answers">
+        <mat-radio-button name="answer" value="{{ answer.id }}"
+          (change)="doAnswerPickup(answer.id)"
+          [checked]="answer.id.equals(selectedAnswerId)">
           {{ answer.text }}
-        </label>
-      </li>
-    </ul>
+        </mat-radio-button>
+      </p>
+  
+    </mat-card-content>
 
-    <p *ngIf="prevQuestion">
-      <button routerLink="/{{ survey.id }}/q/{{ prevQuestion.id.value }}">Poprzednie pytanie</button>
-    </p>
+    <mat-card-actions>
+      
+      <p *ngIf="nextQuestion">
+          <button mat-raised-button color="primary"
+            (click)="doAnswer()"
+            routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}"
+            [disabled]="!selectedAnswerId">Odpowiedz</button>
+  
+          <button mat-button
+            routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}">Pomiń</button>
+      </p>
+      <p *ngIf="!nextQuestion">
+        <button mat-raised-button color="primary"
+          (click)="doAnswer()"
+          routerLink="/{{ survey.id }}/r"
+          [disabled]="!selectedAnswerId">Odpowiedz</button>
+  
+        <button mat-button
+          routerLink="/{{ survey.id }}/r">Pomiń</button>
+      </p>
+  
+    </mat-card-actions>
     
-    <p *ngIf="!prevQuestion">
-      <button routerLink="/{{ survey.id }}">Wróć</button>
-    </p>
-    
-    <p *ngIf="nextQuestion">
-      <button (click)="doAnswer()" routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}" [disabled]="!selectedAnswerId">Odpowiedz</button>
-      <button routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}">Pomiń</button>
-    </p>
-    <p *ngIf="!nextQuestion">
-      <button (click)="doAnswer()" routerLink="/{{ survey.id }}/r" [disabled]="!selectedAnswerId">Odpowiedz</button>
-      <button routerLink="/{{ survey.id }}/r">Pomiń</button>
-    </p>
-    
-</div>
+    <mat-card-actions>
+      <p *ngIf="prevQuestion">
+        <button mat-button
+          routerLink="/{{ survey.id }}/q/{{ prevQuestion.id.value }}">Poprzednie pytanie</button>
+      </p>
+      
+      <p *ngIf="!prevQuestion">
+        <button mat-button
+          routerLink="/{{ survey.id }}">Wróć</button>
+      </p>
+      
+    </mat-card-actions>
+
+</mat-card>

@@ -1,14 +1,26 @@
 <div class="survey">
   <div *ngIf="!survey">
-    Loading...
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
 
   <div *ngIf="survey">
     <h1 class="surveyTitle">{{ survey.title }}</h1>
 
     <div class="lets-start">
-      <button *ngIf="!isQuetionOpened" routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}">Zaczynamy</button>
+      <button mat-raised-button color="primary"
+        *ngIf="!isQuetionOpened"
+        routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}">Zaczynamy</button>
     </div>
+
+    <mat-button-toggle-group *ngIf="isQuetionOpened">
+      <mat-button-toggle *ngFor="let question of survey.questions; let i = index"
+        routerLink="/{{ survey.id }}/q/{{ question.id.value }}">
+        {{ i + 1 }}
+      </mat-button-toggle>
+      <mat-button-toggle routerLink="/{{ survey.id }}/r">
+        wynik
+      </mat-button-toggle>
+    </mat-button-toggle-group>
 
     <ul *ngIf="isQuetionOpened">
       <li *ngFor="let question of survey.questions; let i = index">
