@@ -19,8 +19,9 @@
 
     <ol class="matches">
       <li *ngFor="let match of matches">
-        {{ match.candidate.name }}
-        {{ match.candidate.description }}
+        {{ candidatesById[match.candidateId.value].name }}
+        {{ candidatesById[match.candidateId.value].description }}
+
         {{ match.match * 100 | number: '0.0-2' }}%
       </li>
     </ol>
@@ -35,13 +36,33 @@
       Jeżeli uważasz, że pewna kwestia ma dla Ciebie bardziej kluczowe znaczenie, możesz zmienić swoją odpowiedź i sprawdzić raport ponownie.
     </p>
 
-    <table class="detailedMatches">
-      <thead>
-        <tr>
-          <th></th>
-        </tr>
-      </thead>
-    </table>
+    <ol class="detailedMatches">
+      <li *ngFor="let answerSummary of answersSummary">
+        <p>{{ answerSummary.question.text }}</p>
+
+        <div *ngIf="!answerSummary.userAnswered">
+          Nie udzieliłeś odpowiedzi.
+        </div>
+
+        <ul>
+          <li *ngFor="let answer of answerSummary.answers">
+            {{ answer.answer.text }}
+
+            <div>
+              Takie poglądy mają:
+
+              <div *ngIf="answer.userAnswer">
+                Ty
+              </div>
+              <div *ngFor="let candidateAnswer of answer.candidatesAnswers">
+                {{ candidatesById[candidateAnswer.candidateId.value].name }}
+                {{ candidateAnswer.answer.answer * 100 | number: '0.0-2' }}%
+              </div>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ol>
   </div>
 
 </div>

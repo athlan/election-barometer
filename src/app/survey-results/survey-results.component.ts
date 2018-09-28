@@ -3,9 +3,9 @@ import { SurveyService } from '../survey.service';
 import { Questionare } from '../../domain/Questionare';
 import { Survey } from '../survey';
 import { WeightedAnswersAlgo } from '../../domain/nearestcandidate/algo/WeightedAnswersAlgo';
-import { CandidateMatch } from '../../domain/nearestcandidate/NearestCandidate';
 import { sortCandidateMatchByResult } from '../../domain/nearestcandidate/algo/AlgoUtils';
-import { CandidateId, Candidate, candidateById } from '../../domain/Candidate';
+import { answerForQuestion } from '../../domain/UserAnswer';
+import { answerForQuestion as candidateAnswerForQuestion, answerAs } from '../../domain/CandidateQuestionare';
 
 @Component({
   selector: 'app-survey-results',
@@ -33,13 +33,56 @@ export class SurveyResultsComponent implements OnInit {
     return this.hasUnansweredQuestionsIgnored || !this.hasUnansweredQuestions;
   }
 
+  get candidatesById() {
+    let results = {};
+
+    this.survey.candidates.forEach(c => {
+      results[c.id.value] = c;
+    });
+    
+    return results;
+  }
+
   get matches() {
     let results = this.questionare.matchCandidates(new WeightedAnswersAlgo());
-    results = results.sort(sortCandidateMatchByResult);
+    return results.sort(sortCandidateMatchByResult);
+  }
 
-    return results.map((r: any) => {
-      r.candidate = this.survey.candidates.find(candidateById(r.candidateId));
-      return r;
+  get answersSummary() {
+    let questions = this.survey.questions;
+
+    return questions.map(question => {
+      let userAnswer = this.questionare.answers.find(answerForQuestion(question.id));
+      let userAnswered = userAnswer !== undefined;
+      
+      let answers = question.answers.map(answer => {
+        let candidatesAnswers = [];
+
+        this.survey.candidateQuestionare.forEach(questionare => {
+          let candidateAnswer = questionare.answers
+            .filter(candidateAnswerForQuestion(question.id))
+            .find(answerAs(answer.id));
+
+          if(candidateAnswer) {
+            candidatesAnswers.push({
+              candidateId: questionare.candidateId,
+              answer: candidateAnswer
+            });
+          }
+        })
+        
+        return {
+          answer: answer,
+          userAnswer: userAnswer.answerId.equals(answer.id),
+          candidatesAnswers: candidatesAnswers,
+        }
+      })
+
+      return {
+        question: question,
+        answers: answers,
+        userAnswered: userAnswered
+      };
     });
   }
 
