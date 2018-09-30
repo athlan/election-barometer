@@ -12,25 +12,24 @@
         routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}">Zaczynamy</button>
     </div>
 
-    <mat-button-toggle-group *ngIf="isQuetionOpened">
-      <mat-button-toggle *ngFor="let question of survey.questions; let i = index"
-        routerLink="/{{ survey.id }}/q/{{ question.id.value }}">
+    <p>
+    <mat-chip-list *ngIf="isQuetionOpened">
+      <mat-chip *ngFor="let question of survey.questions; let i = index"
+        
+        routerLink="/{{ survey.id }}/q/{{ question.id.value }}"
+        routerLinkActive="mat-chip-selected"
+        [ngClass]="{ 'question-answered': isQuestionAnswered(question.id) }"
+        >
         {{ i + 1 }}
-      </mat-button-toggle>
-      <mat-button-toggle routerLink="/{{ survey.id }}/r">
-        wynik
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-
-    <ul *ngIf="isQuetionOpened">
-      <li *ngFor="let question of survey.questions; let i = index">
-        <a routerLink="/{{ survey.id }}/q/{{ question.id.value }}">
-          {{ i + 1 }}
-          <span *ngIf="isQuestionAnswered(question.id)">(answered)</span>
-        </a>
-      </li>
-    </ul>
-
+      </mat-chip>
+      <mat-chip
+        routerLink="/{{ survey.id }}/r"
+        routerLinkActive="mat-chip-selected">
+        Wynik
+      </mat-chip>
+    </mat-chip-list>
+    </p>
+    
     <router-outlet></router-outlet>
   </div>
 </div>
