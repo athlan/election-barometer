@@ -7,3 +7,45 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
 .mat-chip.mat-standard-chip.question-answered {
     background-color: #c3ffaa;
 }
+
+body {
+    background-color: #eeeeee;
+}
+
+
+.avatar {
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.avatar-small {
+    width: 28px;
+}
+.avatar-medium {
+    width: 52px;
+}
+
+.avatar-label {
+    background: rgba(0,0,0,.1);
+    border-radius: 14px;
+    display: inline-block;
+    line-height: 28px;
+    padding-right: 10px;
+}
+.avatar-label .avatar {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.sameVote {
+    padding-left: 28px;
+    margin: 10px 0;
+}
+
+.sameVoteLabel {
+    display: inline-block;
+    font-size: 0.85em;
+    color: #777777;
+}

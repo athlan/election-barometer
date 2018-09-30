@@ -1,68 +1,82 @@
-<p>
-  survey-results works!
-</p>
+<mat-card>
+  <mat-card-title>
+    Wyniki
+  </mat-card-title>
 
-<div class="matches">
+  <mat-card-content>
+    <div class="matches">
 
-  <div *ngIf="!presentReport && hasUnansweredQuestions">
-    <h2>Nie odpowiedziano na wszystkie pytania</h2>
+      <div *ngIf="!presentReport && hasUnansweredQuestions">
+        <h2>Nie odpowiedziano na wszystkie pytania</h2>
 
-    <p>
-      Nie udzielono odpowiedzi na wszystkie pytania. Zachęcamy do uzupełnienia wszystkich odpowiedzi.
-    </p>
+        <p>
+          Nie udzielono odpowiedzi na wszystkie pytania. Zachęcamy do uzupełnienia wszystkich odpowiedzi.
+        </p>
 
-    <button (click)="doUnansweredQuestionsIgnore()">Pokaż raport mimo to</button>
-  </div>
+        <button (click)="doUnansweredQuestionsIgnore()">Pokaż raport mimo to</button>
+      </div>
 
-  <div *ngIf="presentReport">
-    <h2>Twoim poglądom najbardziej odpowiadają</h2>
+      <div *ngIf="presentReport">
+        <h2 class="mat-title">Twoim poglądom najbardziej odpowiadają</h2>
 
-    <ol class="matches">
-      <li *ngFor="let match of matches">
-        {{ candidatesById[match.candidateId.value].name }}
-        {{ candidatesById[match.candidateId.value].description }}
+        <ol class="matches">
+          <li *ngFor="let match of matches">
+            {{ candidatesById[match.candidateId.value].name }}
+            {{ candidatesById[match.candidateId.value].description }}
 
-        {{ match.match * 100 | number: '0.0-2' }}%
-      </li>
-    </ol>
-
-    <h2>Szczegółowe wyniki</h2>
-
-    <p>
-      Poniżej prezentujemy szczegółowe wyniki wpływające na rekomendację. Twoja opinia jest porównana z opiniami kandydatów.
-    </p>
-
-    <p>
-      Jeżeli uważasz, że pewna kwestia ma dla Ciebie bardziej kluczowe znaczenie, możesz zmienić swoją odpowiedź i sprawdzić raport ponownie.
-    </p>
-
-    <ol class="detailedMatches">
-      <li *ngFor="let answerSummary of answersSummary">
-        <p>{{ answerSummary.question.text }}</p>
-
-        <div *ngIf="!answerSummary.userAnswered">
-          Nie udzieliłeś odpowiedzi.
-        </div>
-
-        <ul>
-          <li *ngFor="let answer of answerSummary.answers">
-            {{ answer.answer.text }}
-
-            <div>
-              Takie poglądy mają:
-
-              <div *ngIf="answer.userAnswer">
-                Ty
-              </div>
-              <div *ngFor="let candidateAnswer of answer.candidatesAnswers">
-                {{ candidatesById[candidateAnswer.candidateId.value].name }}
-                {{ candidateAnswer.answer.answer * 100 | number: '0.0-2' }}%
-              </div>
-            </div>
+            {{ match.match * 100 | number: '0.0-2' }}%
           </li>
-        </ul>
-      </li>
-    </ol>
-  </div>
+        </ol>
 
-</div>
+        <h2 class="mat-headline">Szczegółowe wyniki</h2>
+
+        <p>
+          Poniżej prezentujemy szczegółowe wyniki wpływające na rekomendację. Twoja opinia jest porównana z opiniami kandydatów.
+        </p>
+
+        <p>
+          Jeżeli uważasz, że pewna kwestia ma dla Ciebie bardziej kluczowe znaczenie, możesz zmienić swoją odpowiedź i sprawdzić raport ponownie.
+        </p>
+
+        <div *ngFor="let answerSummary of answersSummary">
+          <mat-card>
+          <h2 class="mat-title">{{ answerSummary.question.text }}</h2>
+
+          <!--<div *ngIf="!answerSummary.userAnswered">
+            Nie udzieliłeś odpowiedzi.
+          </div>-->
+          
+          <div *ngFor="let answer of answerSummary.answers">
+            <mat-radio-button
+              checked="{{ answer.userAnswer }}">
+              {{ answer.answer.text }}
+            </mat-radio-button>
+            
+            <div class="sameVote">
+              <span *ngIf="!answer.userAnswer && !answer.candidatesAnswers.length"
+                class="sameVoteLabel">Nikt nie podziela tego poglądu</span>
+              <span *ngIf="answer.userAnswer || answer.candidatesAnswers.length"
+                class="sameVoteLabel">Takie pogldy mają:</span>
+              
+              <span *ngIf="answer.userAnswer"
+                class="avatar-label">
+                  <img
+                  src="https://www.w3schools.com/howto/img_avatar.png"
+                  class="avatar" />
+                Ty
+              </span>
+              <span *ngFor="let candidateAnswer of answer.candidatesAnswers"
+                class="avatar-label">
+                <img
+                  src="https://www.w3schools.com/howto/img_avatar.png"
+                  class="avatar" />
+                {{ candidatesById[candidateAnswer.candidateId.value].name }}
+              </span>
+            </div>
+          </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
