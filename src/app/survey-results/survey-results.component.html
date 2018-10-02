@@ -4,7 +4,7 @@
   </mat-card-title>
 
   <mat-card-content>
-    <div class="matches">
+    <div class="page-final-report">
 
       <div *ngIf="!presentReport && hasUnansweredQuestions">
         <h2>Nie odpowiedziano na wszystkie pytania</h2>
@@ -17,14 +17,30 @@
       </div>
 
       <div *ngIf="presentReport">
+        <span
+          class="avatar-label avatar-label-xl">
+            <img
+            src="/assets/images/user-avatar.svg"
+            class="avatar" />
+          Ty
+        </span>
+  
         <h2 class="mat-title">Twoim poglądom najbardziej odpowiadają</h2>
 
         <ol class="matches">
-          <li *ngFor="let match of matches">
-            {{ candidatesById[match.candidateId.value].name }}
-            {{ candidatesById[match.candidateId.value].description }}
-
-            {{ match.match * 100 | number: '0.0-2' }}%
+          <li *ngFor="let match of matches; let i = index" class="my-3">
+            <span class="position mr-3 align-middle">{{ i + 1 }}.</span>
+            <span class="bar" [style.width.%]="match.match * 100"></span>
+            <span class="bar-content">
+              <span
+                class="avatar-label avatar-label-xl">
+                <img
+                  src="{{ candidatesById[match.candidateId.value].image }}"
+                  class="avatar" />
+                {{ candidatesById[match.candidateId.value].name }}
+              </span>
+              {{ match.match * 100 | number: '0.0-2' }}%
+            </span>
           </li>
         </ol>
 
@@ -52,26 +68,30 @@
               {{ answer.answer.text }}
             </mat-radio-button>
             
-            <div class="sameVote">
-              <span *ngIf="!answer.userAnswer && !answer.candidatesAnswers.length"
-                class="sameVoteLabel">Nikt nie podziela tego poglądu</span>
-              <span *ngIf="answer.userAnswer || answer.candidatesAnswers.length"
-                class="sameVoteLabel">Takie pogldy mają:</span>
-              
-              <span *ngIf="answer.userAnswer"
-                class="avatar-label">
+            <div class="sameVote row">
+              <div class="col-12 col-m-12 col-md-auto col-lg-auto col-xl-auto">
+                <span *ngIf="!answer.userAnswer && !answer.candidatesAnswers.length"
+                  class="sameVoteLabel">Nikt nie podziela tego poglądu</span>
+                <span *ngIf="answer.userAnswer || answer.candidatesAnswers.length"
+                  class="sameVoteLabel">Takie pogldy mają:</span>
+              </div>
+
+              <div class="col-12 col-m-12 col-md-auto col-lg-auto col-xl-auto">
+                <span *ngIf="answer.userAnswer"
+                  class="avatar-label mx-1 my-1">
+                    <img
+                    src="/assets/images/user-avatar.svg"
+                    class="avatar" />
+                  Ty
+                </span>
+                <span *ngFor="let candidateAnswer of answer.candidatesAnswers"
+                  class="avatar-label mx-1 my-1">
                   <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  class="avatar" />
-                Ty
-              </span>
-              <span *ngFor="let candidateAnswer of answer.candidatesAnswers"
-                class="avatar-label">
-                <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  class="avatar" />
-                {{ candidatesById[candidateAnswer.candidateId.value].name }}
-              </span>
+                    src="{{ candidatesById[candidateAnswer.candidateId.value].image }}"
+                    class="avatar" />
+                  {{ candidatesById[candidateAnswer.candidateId.value].name }}
+                </span>
+              </div>
             </div>
           </div>
           </mat-card>

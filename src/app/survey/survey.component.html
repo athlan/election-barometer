@@ -1,13 +1,18 @@
-<div class="survey">
-  <div *ngIf="!survey">
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+<div 
+  *ngIf="survey && !isQuetionOpened"
+  class="intro-splash-bg"></div>
+
+<div class="container">
+  <div *ngIf="!survey" class="text-center">
+    <mat-progress-spinner mode="indeterminate" class="block-center"></mat-progress-spinner>
   </div>
 
   <div *ngIf="survey">
     <h1 class="surveyTitle">{{ survey.title }}</h1>
 
-    <div class="lets-start">
+    <div class="lets-start text-center">
       <button mat-raised-button color="primary"
+        class="mat-big-button"
         *ngIf="!isQuetionOpened"
         routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}">Zaczynamy</button>
     </div>

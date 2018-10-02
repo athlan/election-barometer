@@ -38,7 +38,7 @@
   
     </mat-card-content>
     
-    <mat-card-actions>
+    <mat-card-content>
       <p *ngIf="prevQuestion">
         <button mat-button
           routerLink="/{{ survey.id }}/q/{{ prevQuestion.id.value }}">Poprzednie pytanie</button>
@@ -49,6 +49,6 @@
           routerLink="/{{ survey.id }}">Wróć</button>
       </p>
       
-    </mat-card-actions>
+    </mat-card-content>
 
 </mat-card>

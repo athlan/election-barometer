@@ -4,7 +4,8 @@ export class Candidate {
     
     constructor(readonly id: CandidateId,
         readonly name: string,
-        readonly description: string) {}
+        readonly description: string,
+        readonly image: string) {}
 }
 
 export class CandidateId extends GenericId<string> {
