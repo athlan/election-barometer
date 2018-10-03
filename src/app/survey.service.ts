@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
 import { Survey } from './Survey';
 
-import { data as fixtureQuestions } from "test/fixtures/dataset/QuestionsDataset";
-import { data as fixtureCandidatesQuestionaries } from "test/fixtures/dataset/CandidateQuestionariesDataset";
 import { Questionare } from '../domain/Questionare';
 import { UserAnswersSnapshot } from './user-answers/user-answers-repository.service';
 import { LocalStorageRepository } from './user-answers/localstorage-repository.service';
-import { Candidate, CandidateId } from '../domain/Candidate';
+import { SurveyLoaderStaticFileService } from './survey.loader.staticfile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,45 +14,26 @@ export class SurveyService {
   private survey: Survey;
   private questionare: Questionare;
 
-  constructor(private userAnswersRepository: LocalStorageRepository) {}
+  constructor(private surveyLoader: SurveyLoaderStaticFileService,
+    private userAnswersRepository: LocalStorageRepository) {}
 
   public setSurveyContext(surveyId: string): Promise<Survey> {
+    
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        let title = "title";
+      this.surveyLoader.loadSurvey(surveyId)
+        .then((survey) => {
+          this.survey = survey;
+          
+          this.questionare = new Questionare(
+            survey.questions,
+            survey.candidateQuestionare
+          );
 
-        let textIntroduction = "Lorem ipsum dolor sit amet.";
-        let textCompletion = "completion";
-
-        let questions = fixtureQuestions;
-        let candidates = [
-          new Candidate(CandidateId.of("Candidate 1"), "Candidate 1", "Candidate 1", "https://www.w3schools.com/howto/img_avatar.png"),
-          new Candidate(CandidateId.of("Candidate 2"), "Candidate 2", "Candidate 2", "https://www.w3schools.com/howto/img_avatar.png"),
-          new Candidate(CandidateId.of("Candidate 3"), "Candidate 3", "Candidate 3", "https://www.w3schools.com/howto/img_avatar.png"),
-        ];
-        let candidateQuestionare = fixtureCandidatesQuestionaries;
-
-        console.log("Loading remote data... %s", surveyId)
-
-        let survey = new Survey(
-          surveyId,
-          title,
-          textIntroduction,
-          textCompletion,
-          questions,
-          candidates,
-          candidateQuestionare
-        );
-
-        this.survey = survey;
-        
-        this.questionare = new Questionare(
-          survey.questions,
-          survey.candidateQuestionare
-        );
-
-        resolve(survey);
-      }, 500);
+          resolve(survey);
+        })
+        .catch(() => {
+          reject();
+        });
     });
   }
 
