@@ -24,7 +24,7 @@ export class SurveyService {
       setTimeout(() => {
         let title = "title";
 
-        let textIntroduction = "intro";
+        let textIntroduction = "Lorem ipsum dolor sit amet.";
         let textCompletion = "completion";
 
         let questions = fixtureQuestions;
