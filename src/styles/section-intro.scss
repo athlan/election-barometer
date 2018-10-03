@@ -1,0 +1,24 @@
+section.intro {
+    height: 100vh;
+    min-height: 650px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-image: url(https://blackrockdigital.github.io/startbootstrap-creative/img/header.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-color: rgb(74, 66, 63);
+    display: flex!important;
+
+    .container {
+        margin-top: auto!important;
+        margin-bottom: auto!important;
+    }
+
+    hr {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        max-width: 50px;
+        border-width: 3px;
+        border-color: #f05f40;
+    }
+}

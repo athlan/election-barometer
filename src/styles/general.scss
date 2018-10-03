@@ -1,0 +1,25 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+.mat-chip.mat-standard-chip.question-answered {
+    background-color: #c3ffaa;
+}
+
+body {
+    background-color: #eeeeee;
+}
+
+.text-faded {
+    color: rgba(255,255,255,.7);
+}
+
+.block-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mat-big-button.mat-raised-button {
+    font-size: 1.5em;
+    line-height: 50px;
+    padding: 0 35px;
+}

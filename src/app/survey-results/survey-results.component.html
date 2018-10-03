@@ -1,102 +1,99 @@
+<section class="final-report">
 <mat-card>
   <mat-card-title>
     Wyniki
   </mat-card-title>
 
-  <mat-card-content>
-    <div class="page-final-report">
+  <mat-card-content *ngIf="!presentReport && hasUnansweredQuestions">
+    <h2>Nie odpowiedziano na wszystkie pytania</h2>
 
-      <div *ngIf="!presentReport && hasUnansweredQuestions">
-        <h2>Nie odpowiedziano na wszystkie pytania</h2>
+    <p>
+      Nie udzielono odpowiedzi na wszystkie pytania. Zachęcamy do uzupełnienia wszystkich odpowiedzi.
+    </p>
 
-        <p>
-          Nie udzielono odpowiedzi na wszystkie pytania. Zachęcamy do uzupełnienia wszystkich odpowiedzi.
-        </p>
+    <button (click)="doUnansweredQuestionsIgnore()">Pokaż raport mimo to</button>
+  </mat-card-content>
 
-        <button (click)="doUnansweredQuestionsIgnore()">Pokaż raport mimo to</button>
+  <mat-card-content *ngIf="presentReport">
+    <span
+      class="avatar-label avatar-label-xl">
+        <img
+        src="/assets/images/user-avatar.svg"
+        class="avatar" />
+      Ty
+    </span>
+
+    <h2 class="mat-title">Twoim poglądom najbardziej odpowiadają</h2>
+
+    <ol class="matches">
+      <li *ngFor="let match of matches; let i = index" class="my-3">
+        <span class="position align-middle">{{ i + 1 }}.</span>
+        <span class="bar" [style.width.%]="match.match * 100"></span>
+        <span class="bar-content">
+          <span
+            class="avatar-label avatar-label-xl">
+            <img
+              src="{{ candidatesById[match.candidateId.value].image }}"
+              class="avatar" />
+            {{ candidatesById[match.candidateId.value].name }}
+          </span>
+          {{ match.match * 100 | number: '0.0-2' }}%
+        </span>
+      </li>
+    </ol>
+
+    <h2 class="mat-headline">Szczegółowe wyniki</h2>
+
+    <p>
+      Poniżej prezentujemy szczegółowe wyniki wpływające na rekomendację. Twoja opinia jest porównana z opiniami kandydatów.
+    </p>
+
+    <p>
+      Jeżeli uważasz, że pewna kwestia ma dla Ciebie bardziej kluczowe znaczenie, możesz zmienić swoją odpowiedź i sprawdzić raport ponownie.
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<div *ngFor="let answerSummary of answersSummary">
+  <mat-card class="my-4">
+  <h2 class="mat-title">{{ answerSummary.question.text }}</h2>
+
+  <!--<div *ngIf="!answerSummary.userAnswered">
+    Nie udzieliłeś odpowiedzi.
+  </div>-->
+  
+  <div *ngFor="let answer of answerSummary.answers">
+    <mat-radio-button
+      checked="{{ answer.userAnswer }}">
+      {{ answer.answer.text }}
+    </mat-radio-button>
+    
+    <div class="sameVote row">
+      <div class="col-12 col-m-12 col-md-auto col-lg-auto col-xl-auto">
+        <span *ngIf="!answer.userAnswer && !answer.candidatesAnswers.length"
+          class="sameVoteLabel">Nikt nie podziela tego poglądu</span>
+        <span *ngIf="answer.userAnswer || answer.candidatesAnswers.length"
+          class="sameVoteLabel">Takie pogldy mają:</span>
       </div>
 
-      <div *ngIf="presentReport">
-        <span
-          class="avatar-label avatar-label-xl">
+      <div class="col-12 col-m-12 col-md-auto col-lg-auto col-xl-auto">
+        <span *ngIf="answer.userAnswer"
+          class="avatar-label mx-1 my-1">
             <img
             src="/assets/images/user-avatar.svg"
             class="avatar" />
           Ty
         </span>
-  
-        <h2 class="mat-title">Twoim poglądom najbardziej odpowiadają</h2>
-
-        <ol class="matches">
-          <li *ngFor="let match of matches; let i = index" class="my-3">
-            <span class="position mr-3 align-middle">{{ i + 1 }}.</span>
-            <span class="bar" [style.width.%]="match.match * 100"></span>
-            <span class="bar-content">
-              <span
-                class="avatar-label avatar-label-xl">
-                <img
-                  src="{{ candidatesById[match.candidateId.value].image }}"
-                  class="avatar" />
-                {{ candidatesById[match.candidateId.value].name }}
-              </span>
-              {{ match.match * 100 | number: '0.0-2' }}%
-            </span>
-          </li>
-        </ol>
-
-        <h2 class="mat-headline">Szczegółowe wyniki</h2>
-
-        <p>
-          Poniżej prezentujemy szczegółowe wyniki wpływające na rekomendację. Twoja opinia jest porównana z opiniami kandydatów.
-        </p>
-
-        <p>
-          Jeżeli uważasz, że pewna kwestia ma dla Ciebie bardziej kluczowe znaczenie, możesz zmienić swoją odpowiedź i sprawdzić raport ponownie.
-        </p>
-
-        <div *ngFor="let answerSummary of answersSummary">
-          <mat-card>
-          <h2 class="mat-title">{{ answerSummary.question.text }}</h2>
-
-          <!--<div *ngIf="!answerSummary.userAnswered">
-            Nie udzieliłeś odpowiedzi.
-          </div>-->
-          
-          <div *ngFor="let answer of answerSummary.answers">
-            <mat-radio-button
-              checked="{{ answer.userAnswer }}">
-              {{ answer.answer.text }}
-            </mat-radio-button>
-            
-            <div class="sameVote row">
-              <div class="col-12 col-m-12 col-md-auto col-lg-auto col-xl-auto">
-                <span *ngIf="!answer.userAnswer && !answer.candidatesAnswers.length"
-                  class="sameVoteLabel">Nikt nie podziela tego poglądu</span>
-                <span *ngIf="answer.userAnswer || answer.candidatesAnswers.length"
-                  class="sameVoteLabel">Takie pogldy mają:</span>
-              </div>
-
-              <div class="col-12 col-m-12 col-md-auto col-lg-auto col-xl-auto">
-                <span *ngIf="answer.userAnswer"
-                  class="avatar-label mx-1 my-1">
-                    <img
-                    src="/assets/images/user-avatar.svg"
-                    class="avatar" />
-                  Ty
-                </span>
-                <span *ngFor="let candidateAnswer of answer.candidatesAnswers"
-                  class="avatar-label mx-1 my-1">
-                  <img
-                    src="{{ candidatesById[candidateAnswer.candidateId.value].image }}"
-                    class="avatar" />
-                  {{ candidatesById[candidateAnswer.candidateId.value].name }}
-                </span>
-              </div>
-            </div>
-          </div>
-          </mat-card>
-        </div>
+        <span *ngFor="let candidateAnswer of answer.candidatesAnswers"
+          class="avatar-label mx-1 my-1">
+          <img
+            src="{{ candidatesById[candidateAnswer.candidateId.value].image }}"
+            class="avatar" />
+          {{ candidatesById[candidateAnswer.candidateId.value].name }}
+        </span>
       </div>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+  </mat-card>
+</div>
+</section>

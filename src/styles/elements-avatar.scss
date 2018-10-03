@@ -1,0 +1,33 @@
+.avatar {
+    border-radius: 50%;
+    display: inline-block;
+}
+
+$avatar-label-height: 28px;
+$avatar-size-xl-factor: 2;
+
+.avatar-label {
+    background: rgba(0,0,0,.1);
+    border-radius: #{$avatar-label-height / 2};
+    display: inline-block;
+    line-height: $avatar-label-height;
+    padding-right: 10px;
+
+    .avatar {
+        width: $avatar-label-height;
+        height: $avatar-label-height;
+        vertical-align: middle;
+        margin-top: -1px;
+        margin-right: 6px;
+    }
+}
+
+.avatar-label-xl {
+    border-radius: #{$avatar-label-height / 2 * $avatar-size-xl-factor};
+    line-height: #{$avatar-label-height * $avatar-size-xl-factor};
+
+    .avatar {
+        width: #{$avatar-label-height * $avatar-size-xl-factor};
+        height: #{$avatar-label-height * $avatar-size-xl-factor};
+    }
+}

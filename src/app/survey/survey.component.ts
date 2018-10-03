@@ -43,4 +43,8 @@ export class SurveyComponent implements OnInit {
   public isQuestionAnswered(quetionId: QuestionId): boolean {
     return this.questionare.answeredQuestions.find(id => id.equals(quetionId)) !== undefined;
   }
+
+  get isIntro(): boolean {
+    return !this.isQuetionOpened;
+  }
 }

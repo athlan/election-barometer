@@ -1,40 +1,60 @@
-<div 
-  *ngIf="survey && !isQuetionOpened"
-  class="intro-splash-bg"></div>
-
-<div class="container">
-  <div *ngIf="!survey" class="text-center">
-    <mat-progress-spinner mode="indeterminate" class="block-center"></mat-progress-spinner>
-  </div>
-
-  <div *ngIf="survey">
-    <h1 class="surveyTitle">{{ survey.title }}</h1>
-
-    <div class="lets-start text-center">
-      <button mat-raised-button color="primary"
-        class="mat-big-button"
-        *ngIf="!isQuetionOpened"
-        routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}">Zaczynamy</button>
+<section *ngIf="isIntro" class="intro text-center">
+  <div class="container">
+    <div *ngIf="!survey" class="text-center">
+      <mat-progress-spinner mode="indeterminate" class="block-center"></mat-progress-spinner>
     </div>
 
-    <p>
-    <mat-chip-list *ngIf="isQuetionOpened">
-      <mat-chip *ngFor="let question of survey.questions; let i = index"
-        
-        routerLink="/{{ survey.id }}/q/{{ question.id.value }}"
-        routerLinkActive="mat-chip-selected"
-        [ngClass]="{ 'question-answered': isQuestionAnswered(question.id) }"
-        >
-        {{ i + 1 }}
-      </mat-chip>
-      <mat-chip
-        routerLink="/{{ survey.id }}/r"
-        routerLinkActive="mat-chip-selected">
-        Wynik
-      </mat-chip>
-    </mat-chip-list>
-    </p>
-    
-    <router-outlet></router-outlet>
+    <div *ngIf="survey" class="text-white">
+      <h1 class="text-uppercase">{{ survey.title }}</h1>
+
+      <hr />
+
+      <p class="text-faded mb-5">
+        Lorem ipsum dolor sit amet.
+      </p>
+
+      <div class="lets-start text-center">
+        <button mat-raised-button color="primary"
+          class="mat-big-button"
+          *ngIf="!isQuetionOpened"
+          routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}">Zaczynamy</button>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+
+<section *ngIf="!isIntro">
+  <div class="container">
+    <div *ngIf="survey">
+      <h1 class="surveyTitle">{{ survey.title }}</h1>
+
+      <div class="lets-start text-center">
+        <button mat-raised-button color="primary"
+          class="mat-big-button"
+          *ngIf="!isQuetionOpened"
+          routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}">Zaczynamy</button>
+      </div>
+
+      <p>
+      <mat-chip-list *ngIf="isQuetionOpened">
+        <mat-chip *ngFor="let question of survey.questions; let i = index"
+          
+          routerLink="/{{ survey.id }}/q/{{ question.id.value }}"
+          routerLinkActive="mat-chip-selected"
+          [ngClass]="{ 'question-answered': isQuestionAnswered(question.id) }"
+          >
+          {{ i + 1 }}
+        </mat-chip>
+        <mat-chip
+          routerLink="/{{ survey.id }}/r"
+          routerLinkActive="mat-chip-selected">
+          Wynik
+        </mat-chip>
+      </mat-chip-list>
+      </p>
+      
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</section>
