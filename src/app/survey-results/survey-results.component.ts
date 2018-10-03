@@ -89,4 +89,9 @@ export class SurveyResultsComponent implements OnInit {
   public doUnansweredQuestionsIgnore() {
     this.hasUnansweredQuestionsIgnored = true;
   }
+
+  public doRestart() {
+    this.surveyService.getQuestionare().reset();
+    this.surveyService.saveAnswers();
+  }
 }

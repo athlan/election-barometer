@@ -40,6 +40,10 @@ export class SurveyComponent implements OnInit {
       })
   }
 
+  public doStart() {
+    this.surveyService.getQuestionare().reset();
+  }
+
   public isQuestionAnswered(quetionId: QuestionId): boolean {
     return this.questionare.answeredQuestions.find(id => id.equals(quetionId)) !== undefined;
   }

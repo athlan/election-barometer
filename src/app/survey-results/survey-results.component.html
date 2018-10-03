@@ -5,23 +5,27 @@
   </mat-card-title>
 
   <mat-card-content *ngIf="!presentReport && hasUnansweredQuestions">
-    <h2>Nie odpowiedziano na wszystkie pytania</h2>
+    <h2 class="mat-title">Nie odpowiedziano na wszystkie pytania</h2>
 
     <p>
       Nie udzielono odpowiedzi na wszystkie pytania. Zachęcamy do uzupełnienia wszystkich odpowiedzi.
     </p>
 
-    <button (click)="doUnansweredQuestionsIgnore()">Pokaż raport mimo to</button>
+    <button mat-raised-button color="primary"
+      (click)="doUnansweredQuestionsIgnore()">
+      Pokaż raport mimo to</button>
   </mat-card-content>
 
   <mat-card-content *ngIf="presentReport">
-    <span
-      class="avatar-label avatar-label-xl">
-        <img
-        src="/assets/images/user-avatar.svg"
-        class="avatar" />
-      Ty
-    </span>
+    <p>
+      <span
+        class="avatar-label avatar-label-xl">
+          <img
+          src="/assets/images/user-avatar.svg"
+          class="avatar" />
+        Ty
+      </span>
+    </p>
 
     <h2 class="mat-title">Twoim poglądom najbardziej odpowiadają</h2>
 
@@ -42,6 +46,14 @@
       </li>
     </ol>
 
+    <p class="text-center">
+      <button mat-raised-button color="primary"
+        class="my-3"
+        (click)="doRestart()"
+        routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}"
+        >Rozwiąż jeszcze raz</button>
+    </p>
+
     <h2 class="mat-headline">Szczegółowe wyniki</h2>
 
     <p>
@@ -54,6 +66,7 @@
   </mat-card-content>
 </mat-card>
 
+<div *ngIf="presentReport">
 <div *ngFor="let answerSummary of answersSummary">
   <mat-card class="my-4">
   <h2 class="mat-title">{{ answerSummary.question.text }}</h2>
@@ -95,5 +108,6 @@
     </div>
   </div>
   </mat-card>
+</div>
 </div>
 </section>
