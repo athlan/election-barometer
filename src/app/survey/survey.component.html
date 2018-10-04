@@ -9,9 +9,8 @@
 
       <hr />
 
-      <p class="text-faded mb-5">
-        {{ survey.textIntroduction }}
-      </p>
+      <div class="text-faded mb-5" [innerHtml]="survey.textIntroduction">
+      </div>
 
       <div class="lets-start text-center">
         <button mat-raised-button color="primary"

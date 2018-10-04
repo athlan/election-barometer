@@ -31,7 +31,8 @@ export class SurveyService {
 
           resolve(survey);
         })
-        .catch(() => {
+        .catch((e) => {
+          console.error(e);
           reject();
         });
     });

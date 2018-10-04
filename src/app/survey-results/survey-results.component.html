@@ -56,13 +56,8 @@
 
     <h2 class="mat-headline">Szczegółowe wyniki</h2>
 
-    <p>
-      Poniżej prezentujemy szczegółowe wyniki wpływające na rekomendację. Twoja opinia jest porównana z opiniami kandydatów.
-    </p>
-
-    <p>
-      Jeżeli uważasz, że pewna kwestia ma dla Ciebie bardziej kluczowe znaczenie, możesz zmienić swoją odpowiedź i sprawdzić raport ponownie.
-    </p>
+    <div [innerHtml]="survey.textCompletion">
+    </div>
   </mat-card-content>
 </mat-card>
 

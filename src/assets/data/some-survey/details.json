@@ -1,0 +1,151 @@
+{
+    "title": "Wybory samorządowe 2018",
+    "textIntroduction": "Witaj w barometre wyborczym. Sporządziliśmy listę pytań związanych z poglądami na wybrane tematy, które zadaliśmy kandydatom. Jeżeli udzielisz odpowiedzi na pytania przedstawimy Ci metodą statytyczną, jak Twoje poglądy pokrywają się z poglądami kandydatów. Twoje odpowiedzi są anoniowe i nie będą zapisane.",
+    "textCompletion": "<p>Poniżej prezentujemy szczegółowe wyniki wpływające na rekomendację. Twoja opinia jest porównana z opiniami kandydatów.</p><p>Jeżeli uważasz, że pewna kwestia ma dla Ciebie bardziej kluczowe znaczenie, możesz zmienić swoją odpowiedź i sprawdzić raport ponownie.</p>",
+
+    "questions": [
+        {
+            "id": "1",
+            "text": "Pytanie 1",
+            "description": "",
+            "answers": [
+                {
+                    "id": "1",
+                    "text": "Odp 1",
+                    "description": ""
+                },
+                {
+                    "id": "2",
+                    "text": "Odp 2",
+                    "description": ""
+                },
+                {
+                    "id": "3",
+                    "text": "Odp 3",
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "text": "Pytanie 2",
+            "description": "",
+            "answers": [
+                {
+                    "id": "1",
+                    "text": "Odp 1",
+                    "description": ""
+                },
+                {
+                    "id": "2",
+                    "text": "Odp 2",
+                    "description": ""
+                },
+                {
+                    "id": "3",
+                    "text": "Odp 3",
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "text": "Pytanie 3",
+            "description": "",
+            "answers": [
+                {
+                    "id": "1",
+                    "text": "Odp 1",
+                    "description": ""
+                },
+                {
+                    "id": "2",
+                    "text": "Odp 2",
+                    "description": ""
+                },
+                {
+                    "id": "3",
+                    "text": "Odp 3",
+                    "description": ""
+                }
+            ]
+        }
+    ],
+
+    "candidates": [
+        {
+            "id": "1",
+            "name": "Candidate 1",
+            "description": "",
+            "image": "assets/images/sample-candidate-avatar.png",
+            "answers": [
+                {
+                    "questionId": "1",
+                    "answerId": "1",
+                    "score": 1.0
+                },
+                {
+                    "questionId": "2",
+                    "answerId": "1",
+                    "score": 1.0
+                },
+                {
+                    "questionId": "3",
+                    "answerId": "1",
+                    "score": 1.0
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "Candidate 2",
+            "description": "",
+            "image": "assets/images/sample-candidate-avatar.png",
+            "answers": [
+                {
+                    "questionId": "1",
+                    "answerId": "2",
+                    "score": 1.0
+                },
+                {
+                    "questionId": "2",
+                    "answerId": "2",
+                    "score": 1.0
+                },
+                {
+                    "questionId": "3",
+                    "answerId": "3",
+                    "score": 1.0
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "Candidate 3",
+            "description": "",
+            "image": "assets/images/sample-candidate-avatar.png",
+            "answers": [
+                {
+                    "questionId": "1",
+                    "answerId": "1",
+                    "score": 0.5
+                },
+                {
+                    "questionId": "1",
+                    "answerId": "2",
+                    "score": 0.5
+                },
+                {
+                    "questionId": "2",
+                    "answerId": "2",
+                    "score": 1.0
+                },
+                {
+                    "questionId": "3",
+                    "answerId": "3",
+                    "score": 1.0
+                }
+            ]
+        }
+    ]
+}
