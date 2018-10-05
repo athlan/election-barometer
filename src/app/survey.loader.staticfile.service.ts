@@ -28,8 +28,7 @@ export class SurveyLoaderStaticFileService {
     return new Survey(
       surveyId,
       data.title,
-      data.textIntroduction,
-      data.textCompletion,
+      data.properties,
       data.questions.map(item => this.parseQuestion(item)),
       data.candidates.map(item => this.parseCandidate(item)),
       data.candidates.map(item => this.parseCandidateQuestionare(item)),

@@ -8,8 +8,7 @@ export class Survey {
         readonly id: string,
         readonly title: string,
         
-        readonly textIntroduction: string,
-        readonly textCompletion: string,
+        readonly properties: Map<string, object>,
 
         readonly questions: Question[],
         readonly candidates: Candidate[],

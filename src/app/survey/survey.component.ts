@@ -4,6 +4,7 @@ import { SurveyService } from '../survey.service';
 import { Survey } from '../survey';
 import { Questionare } from '../../domain/Questionare';
 import { QuestionId } from '../../domain/Question';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-survey',
@@ -17,7 +18,8 @@ export class SurveyComponent implements OnInit {
   isQuetionOpened: boolean;
 
   constructor(private route: ActivatedRoute,
-    private surveyService: SurveyService) {
+    private surveyService: SurveyService,
+    private titleService: Title) {
   }
 
   ngOnInit() {
@@ -37,6 +39,8 @@ export class SurveyComponent implements OnInit {
         this.survey = survey;
         this.questionare = this.surveyService.getQuestionare();
         this.surveyService.loadAnswers();
+
+        this.titleService.setTitle(survey.title);
       })
   }
 

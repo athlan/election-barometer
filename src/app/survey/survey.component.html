@@ -5,11 +5,11 @@
     </div>
 
     <div *ngIf="survey" class="text-white">
-      <h1 class="text-uppercase">{{ survey.title }}</h1>
-
+      <div [innerHtml]="survey.properties.introHeadingHtml"></div>
+      
       <hr />
 
-      <div class="text-faded mb-5" [innerHtml]="survey.textIntroduction">
+      <div class="text-faded mb-5" [innerHtml]="survey.properties.textIntroduction">
       </div>
 
       <div class="lets-start text-center">
@@ -26,7 +26,7 @@
 <section *ngIf="!isIntro">
   <div class="container">
     <div *ngIf="survey">
-      <h1 class="surveyTitle">{{ survey.title }}</h1>
+      <div class="surveyTitle" [innerHtml]="survey.properties.titleHeadingHtml"></div>
 
       <p>
       <mat-chip-list *ngIf="isQuetionOpened">
