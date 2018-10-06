@@ -14,7 +14,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-Full prod build example to put into some directory: `ng build --prod --base-href barometr`
+Full prod build example to put into some directory: `ng build --prod --source-map --base-href barometr`
 
 ## Running unit tests
 
