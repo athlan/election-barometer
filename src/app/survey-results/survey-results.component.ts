@@ -6,6 +6,7 @@ import { WeightedAnswersAlgo } from '../../domain/nearestcandidate/algo/Weighted
 import { sortCandidateMatchByResult } from '../../domain/nearestcandidate/algo/AlgoUtils';
 import { answerForQuestion } from '../../domain/UserAnswer';
 import { answerForQuestion as candidateAnswerForQuestion, answerAs } from '../../domain/CandidateQuestionare';
+import { CandidateMatch } from '../../domain/nearestcandidate/NearestCandidate';
 
 @Component({
   selector: 'app-survey-results',
@@ -17,12 +18,18 @@ export class SurveyResultsComponent implements OnInit {
   private survey: Survey;
   private questionare: Questionare;
   private hasUnansweredQuestionsIgnored: boolean = false;
+  private matches: CandidateMatch[];
+  private matchesMaxScore: number;
 
   constructor(private surveyService: SurveyService) {}
 
   ngOnInit() {
     this.survey = this.surveyService.getSurvey();
     this.questionare = this.surveyService.getQuestionare();
+
+    let matches = this.questionare.matchCandidates(new WeightedAnswersAlgo());
+    this.matches = matches.sort(sortCandidateMatchByResult);
+    this.matchesMaxScore = Math.max(... matches.map(m => m.match));
   }
 
   get hasUnansweredQuestions(): boolean {
@@ -41,11 +48,6 @@ export class SurveyResultsComponent implements OnInit {
     });
     
     return results;
-  }
-
-  get matches() {
-    let results = this.questionare.matchCandidates(new WeightedAnswersAlgo());
-    return results.sort(sortCandidateMatchByResult);
   }
 
   get answersSummary() {
@@ -73,7 +75,7 @@ export class SurveyResultsComponent implements OnInit {
         
         return {
           answer: answer,
-          userAnswer: userAnswer.answerId.equals(answer.id),
+          userAnswer: (userAnswered) ? userAnswer.answerId.equals(answer.id) : false,
           candidatesAnswers: candidatesAnswers,
         }
       })

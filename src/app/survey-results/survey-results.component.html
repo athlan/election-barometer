@@ -21,7 +21,7 @@
       <span
         class="avatar-label avatar-label-xl">
           <img
-          src="/assets/images/user-avatar.svg"
+          src="assets/images/user-avatar.svg"
           class="avatar" />
         Ty
       </span>
@@ -32,7 +32,7 @@
     <ol class="matches">
       <li *ngFor="let match of matches; let i = index" class="my-3">
         <span class="position align-middle">{{ i + 1 }}.</span>
-        <span class="bar" [style.width.%]="match.match * 100"></span>
+        <span class="bar" [style.width.%]="match.match * 100 / matchesMaxScore"></span>
         <span class="bar-content">
           <span
             class="avatar-label avatar-label-xl">
@@ -77,18 +77,18 @@
     </mat-radio-button>
     
     <div class="sameVote row">
-      <div class="col-12 col-m-12 col-md-auto col-lg-auto col-xl-auto">
+      <div class="col-12 col-m-12">
         <span *ngIf="!answer.userAnswer && !answer.candidatesAnswers.length"
           class="sameVoteLabel">Nikt nie podziela tego poglądu</span>
         <span *ngIf="answer.userAnswer || answer.candidatesAnswers.length"
-          class="sameVoteLabel">Takie pogldy mają:</span>
+          class="sameVoteLabel">Takie poglądy mają:</span>
       </div>
 
-      <div class="col-12 col-m-12 col-md-auto col-lg-auto col-xl-auto">
+      <div class="col-12 col-m-12">
         <span *ngIf="answer.userAnswer"
           class="avatar-label mx-1 my-1">
             <img
-            src="/assets/images/user-avatar.svg"
+            src="assets/images/user-avatar.svg"
             class="avatar" />
           Ty
         </span>

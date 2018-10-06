@@ -19,3 +19,10 @@ $inherited-app-theme: mat-light-theme($inherited-app-primary, $inherited-app-acc
     line-height: 50px;
     padding: 0 35px;
 }
+
+mat-radio-button .mat-radio-label-content {
+    white-space: normal;
+}
+mat-radio-button .mat-radio-label {
+    align-items: normal;
+}

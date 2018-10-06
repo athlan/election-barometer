@@ -11,15 +11,16 @@ import { CandidateQuestionare, CandidateAnswer } from '../domain/CandidateQuesti
   providedIn: 'root'
 })
 export class SurveyLoaderStaticFileService {
-
+  
   constructor(private http: HttpClient) {
   }
 
   public loadSurvey(surveyId: string): Promise<Survey> {
-    let basepath = "assets/data/" + surveyId + "/";
-    let configFile = basepath + "details.json";
+    const baseUrl = document.getElementsByTagName('base')[0].href;
+    let url = "/assets/data/" + surveyId + "/details.json";
+    url = baseUrl + url;
 
-    return this.http.get(configFile)
+    return this.http.get(url)
       .pipe(map((data) => this.parseSurvey(surveyId, data)))
       .toPromise();
   }
