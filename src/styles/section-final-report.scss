@@ -34,9 +34,15 @@ section.final-report {
         .avatar-label {
             // background: rgba(255,255,255,.7);
             background: none;
+
+            .avatar {
+                width: 75px;
+                height: 75px;
+            }
         }
 
         .bar {
+            top: 8px;
             position: absolute;
             display: inline-block;
             background: rgba(0, 0, 0, 0.1);
