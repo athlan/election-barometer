@@ -1,5 +1,9 @@
 @import '~@angular/material/theming';
 
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
 @include mat-core();
 
 $inherited-app-primary: mat-palette($mat-indigo);
@@ -25,4 +29,22 @@ mat-radio-button .mat-radio-label-content {
 }
 mat-radio-button .mat-radio-label {
     align-items: normal;
+}
+
+
+.mat-title.survey-question {
+    line-height: 140%;
+    margin-bottom: 16px;
+
+    @include media-breakpoint-only(xs) {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    @include media-breakpoint-only(sm) {
+        font-size: 18px;
+        font-weight: 500;
+    }
+    @include media-breakpoint-only(md) {
+        font-size: 20px;
+    }
 }
