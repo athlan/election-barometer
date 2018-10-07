@@ -50,6 +50,7 @@ export class SurveyLoaderStaticFileService {
       AnswerId.of(data.id),
       data.text,
       data.description,
+      (data.nullable) ? data.nullable : false,
     );
   }
 

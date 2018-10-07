@@ -1,6 +1,6 @@
 import { Question, QuestionId, AnswerId } from './Question';
-import { CandidateQuestionare, answerForQuestion } from './CandidateQuestionare';
-import { UserAnswer } from './UserAnswer';
+import { CandidateQuestionare } from './CandidateQuestionare';
+import { UserAnswer, answerForQuestion } from './UserAnswer';
 import { NearestCandidateAlgo, CandidateMatch } from './nearestcandidate/NearestCandidate';
 
 export class Questionare {
@@ -27,6 +27,15 @@ export class Questionare {
             throw "Given answer does not exists.";
         }
 
+        let selectedAnswer = this.questions
+            .find(q => q.id.equals(userAnswer.questionId))
+            .answers
+            .find(a => a.id.equals(userAnswer.answerId));
+
+        if(selectedAnswer.isNullableAnswer) {
+            userAnswer.markAsNullable();
+        }
+
         let foundAnswerIdx = this.userAnswers.findIndex(answerForQuestion(userAnswer.questionId));
 
         if(foundAnswerIdx != -1) {
@@ -42,7 +51,9 @@ export class Questionare {
     }
 
     get answeredQuestions(): QuestionId[] {
-        return this.userAnswers.map(a => a.questionId);
+        return this.userAnswers
+            .filter(a => !a.isNullable)
+            .map(a => a.questionId);
     }
 
     get finished(): boolean {

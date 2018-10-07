@@ -1,13 +1,19 @@
 import { QuestionId, AnswerId } from "./Question";
 
 export class UserAnswer {
-    readonly questionId: QuestionId;
-    readonly answerId: AnswerId;
+    private _nullable: boolean;
 
-    constructor(questionId: QuestionId,
-        answerId: AnswerId) {
-        this.questionId = questionId;
-        this.answerId = answerId;
+    constructor(readonly questionId: QuestionId,
+        readonly answerId: AnswerId) {
+        this._nullable = false;
+    }
+
+    public markAsNullable() {
+        this._nullable = true;
+    }
+
+    get isNullable() {
+        return this._nullable;
     }
 }
 

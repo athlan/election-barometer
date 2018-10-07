@@ -8,10 +8,10 @@ export function createQuestion(questionId: string, answers: Answer[]): Question 
     return new Question(id, text, description, answers);
 }
 
-export function withAnswer(answerId: string): Answer {
+export function withAnswer(answerId: string, isNullableAnswer: boolean = false): Answer {
     let id = AnswerId.of(answerId);
     let text = "Answer " + answerId;
     let description = "Answer description" + answerId;
     
-    return new Answer(id, text, description);
+    return new Answer(id, text, description, isNullableAnswer);
 }

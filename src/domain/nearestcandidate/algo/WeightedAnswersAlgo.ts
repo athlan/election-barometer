@@ -8,11 +8,18 @@ export class WeightedAnswersAlgo implements NearestCandidateAlgo {
     match(candidateQuestionaries: CandidateQuestionare[], userAnswers: UserAnswer[]): CandidateMatch[] {
         let ctx: AlgoContext = new AlgoContext();
         ctx.registerCandidates(candidateQuestionaries);
-        ctx.numberOfAnswers(userAnswers.length);
+        ctx.numberOfAnswers(userAnswers
+            .filter(a => !a.isNullable)
+            .length
+        );
 
         userAnswers.forEach(userAnswer => {
             let theUsersAnswerId = userAnswer.answerId;
             let theUsersQuestionId = userAnswer.questionId;
+
+            if(userAnswer.isNullable) {
+                return;
+            }
 
             candidateQuestionaries.forEach(q => {
                 let candidateAnswer = q.answers

@@ -28,13 +28,16 @@ export class Answer {
     readonly id: AnswerId;
     readonly text: string;
     readonly description: string;
+    readonly isNullableAnswer: boolean;
     
     constructor(id: AnswerId,
         text: string,
-        description: string) {
+        description: string,
+        isNullableAnswer: boolean) {
         this.id = id;
         this.text = text;
         this.description = description;
+        this.isNullableAnswer = isNullableAnswer;
     }
 }
 

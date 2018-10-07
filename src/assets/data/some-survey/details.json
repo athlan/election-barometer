@@ -28,6 +28,12 @@
                     "id": "3",
                     "text": "Odp 3",
                     "description": ""
+                },
+                {
+                    "id": "X",
+                    "text": "Nie mam zdania",
+                    "description": "",
+                    "nullable": true
                 }
             ]
         },
@@ -50,6 +56,12 @@
                     "id": "3",
                     "text": "Odp 3",
                     "description": ""
+                },
+                {
+                    "id": "X",
+                    "text": "Nie mam zdania",
+                    "description": "",
+                    "nullable": true
                 }
             ]
         },
@@ -72,6 +84,12 @@
                     "id": "3",
                     "text": "Odp 3",
                     "description": ""
+                },
+                {
+                    "id": "X",
+                    "text": "Nie mam zdania",
+                    "description": "",
+                    "nullable": true
                 }
             ]
         }

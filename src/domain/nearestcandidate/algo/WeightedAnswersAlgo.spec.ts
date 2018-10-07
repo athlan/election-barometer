@@ -1,4 +1,4 @@
-import { userAnswer } from "test/fixtures/UserAnswerFactory"
+import { userAnswer, userAnswerNullable } from "test/fixtures/UserAnswerFactory"
 import { data as fixtureCandidatesQuestionaries } from "test/fixtures/dataset/CandidateQuestionariesDataset";
 import { NearestCandidateAlgo, matchByCandidateId } from "../NearestCandidate";
 import { WeightedAnswersAlgo } from "./WeightedAnswersAlgo";
@@ -122,6 +122,26 @@ describe('WeightedAnswersAlgo spec', () => {
         expect(candidate1Match.match).toBe(1 / numberOfAnswers); // Q1 (OK)
         expect(candidate2Match.match).toBe((1 + 1) / numberOfAnswers); // Q2 (OK), Q3 (OK)
         expect(candidate3Match.match).toBe((0.5 + 1 + 1) / numberOfAnswers); // Q1 (OK 50%), Q2 (OK), Q3 (OK)
+
+        expect(matches.length).toBe(candidatesQuestionaries.length);
+    });
+    
+    it('do not consider nullable answers', () => {
+        // given
+        let theCandidate1Id = CandidateId.of("Candidate 1");
+        let userAnswers = [
+            userAnswer("Q1", "A1"),
+            userAnswer("Q2", "A1"),
+            userAnswerNullable("Q3", "AX"),
+        ];
+        let numberOfAnswers = userAnswers.length - 1;
+
+        // when
+        let matches = matchingAlgo.match(candidatesQuestionaries, userAnswers);
+        let candidate1Match = matches.find(matchByCandidateId(theCandidate1Id));
+
+        // then
+        expect(candidate1Match.match).toBe(1);
 
         expect(matches.length).toBe(candidatesQuestionaries.length);
     });

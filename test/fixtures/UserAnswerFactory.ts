@@ -7,3 +7,10 @@ export function userAnswer(questionId: string, answerId: string): UserAnswer {
     
     return new UserAnswer(theQuestionId, theAnswerId);
 }
+
+export function userAnswerNullable(questionId: string, answerId: string): UserAnswer {
+    let answer = userAnswer(questionId, answerId);
+    answer.markAsNullable();
+    
+    return answer;
+}
