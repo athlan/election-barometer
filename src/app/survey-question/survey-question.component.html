@@ -17,30 +17,36 @@
       
       <span *ngIf="nextQuestion">
           <button mat-raised-button color="primary"
+            class="survey-nav-answer"
             (click)="doAnswer()"
             routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}"
-            [disabled]="!selectedAnswerId">Odpowiedz</button>
+            [disabled]="!selectedAnswerId">Dalej</button>
   
           <button mat-button
+            class="survey-nav-skip"
             routerLink="/{{ survey.id }}/q/{{ nextQuestion.id.value }}">Pomiń</button>
       </span>
       <span *ngIf="!nextQuestion">
         <button mat-raised-button color="primary"
+          class="survey-nav-answer"
           (click)="doAnswer()"
           routerLink="/{{ survey.id }}/r"
-          [disabled]="!selectedAnswerId">Odpowiedz</button>
+          [disabled]="!selectedAnswerId">Dalej</button>
   
         <button mat-button
+          class="survey-nav-skip"
           routerLink="/{{ survey.id }}/r">Pomiń</button>
       </span>
   
       <span *ngIf="prevQuestion">
         <button mat-button
+          class="survey-nav-previous"
           routerLink="/{{ survey.id }}/q/{{ prevQuestion.id.value }}">Poprzednie</button>
       </span>
       
       <span *ngIf="!prevQuestion">
         <button mat-button
+          class="survey-nav-previous"
           routerLink="/{{ survey.id }}">Wróć</button>
       </span>
     </mat-card-content>
