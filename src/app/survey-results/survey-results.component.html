@@ -35,14 +35,17 @@
         <span class="position align-middle">{{ i + 1 }}.</span>
         <span class="bar" [style.width.%]="match.match * 100 / matchesMaxScore"></span>
         <span class="bar-content">
-          <span
-            class="avatar-label avatar-label-xl">
-            <img
-              src="{{ candidatesById[match.candidateId.value].image }}"
-              class="avatar" />
-            {{ candidatesById[match.candidateId.value].name }}
-          </span>
-          {{ match.match * 100 | number: '0.0-2' }}%
+          <div class="row align-items-center">
+            <div class="col col-auto">
+              <img
+                src="{{ candidatesById[match.candidateId.value].image }}"
+                class="avatar" />
+            </div>
+            <div class="col avatar-label">
+              {{ candidatesById[match.candidateId.value].name }}
+              <span class="percentage">{{ match.match * 100 | number: '0.0-2' }}%</span>
+            </div>
+          </div>
         </span>
       </li>
     </ol>

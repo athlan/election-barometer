@@ -98,7 +98,7 @@
     "candidates": [
         {
             "id": "1",
-            "name": "Candidate 1",
+            "name": "Candidate Candidate 1",
             "description": "",
             "image": "assets/images/sample-candidate-avatar.png",
             "answers": [
@@ -121,7 +121,7 @@
         },
         {
             "id": "2",
-            "name": "Candidate 2",
+            "name": "Candidate Candidate 2",
             "description": "",
             "image": "assets/images/sample-candidate-avatar.png",
             "answers": [
@@ -144,7 +144,7 @@
         },
         {
             "id": "3",
-            "name": "Candidate 3",
+            "name": "Candidate Candidate 3",
             "description": "",
             "image": "assets/images/sample-candidate-avatar.png",
             "answers": [
