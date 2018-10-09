@@ -4,7 +4,7 @@
     Wyniki
   </mat-card-title>
 
-  <mat-card-content *ngIf="!presentReport && hasUnansweredQuestions">
+  <mat-card-content *ngIf="presentInfoUnansweredQuestions">
     <h2 class="mat-title">Nie odpowiedziano na wszystkie pytania</h2>
 
     <p>
@@ -32,7 +32,6 @@
 
     <ol class="matches">
       <li *ngFor="let match of matches; let i = index" class="my-3">
-        <span class="position align-middle">{{ i + 1 }}.</span>
         <span class="bar" [style.width.%]="match.match * 100 / matchesMaxScore"></span>
         <span class="bar-content">
           <div class="row align-items-center">
@@ -55,7 +54,7 @@
         class="survey-nav-take-again my-3"
         (click)="doRestart()"
         routerLink="/{{ survey.id }}/q/{{ survey.questions[0].id.value }}"
-        >Rozwiąż jeszcze raz</button>
+        >Odpowiedz jeszcze raz</button>
     </p>
 
     <h2 class="mat-headline">Szczegółowe wyniki</h2>

@@ -37,7 +37,15 @@ export class SurveyResultsComponent implements OnInit {
   }
 
   get presentReport(): boolean {
-    return this.hasUnansweredQuestionsIgnored || !this.hasUnansweredQuestions;
+    return !this.presentInfoUnansweredQuestions;
+  }
+
+  get presentInfoUnansweredQuestions(): boolean {
+    let displayInfo = this.survey.properties['reportInfoAboutUnansweredQuestions'];
+
+    return this.hasUnansweredQuestions
+        && displayInfo !== false
+        && !this.hasUnansweredQuestionsIgnored;
   }
 
   get candidatesById() {

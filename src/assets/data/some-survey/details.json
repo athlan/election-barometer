@@ -2,6 +2,8 @@
     "title": "Wybory samorządowe 2018",
 
     "properties": {
+        "reportInfoAboutUnansweredQuestions": false,
+        
         "introHeadingHtml": "<img src='https://www.nowiny.pl/static/gfx/logo-monochromatic-white.png' alt='nowiny' height='32' class='my-3' /><h1 class='text-uppercase'>Wybory samorządowe 2018</h1>        ",
         "titleHeadingHtml": "<div class='row py-2'><div class='col-md-auto col-sm-12'><img src='https://www.nowiny.pl/static/img/logo.png' alt='nowiny' height='32' /></div><div class='col-md-auto col-sm-12'><h3>Wybory samorządowe 2018</h3></div></div>",
         "textIntroduction": "Witaj w barometre wyborczym. Sporządziliśmy listę pytań związanych z poglądami na wybrane tematy, które zadaliśmy kandydatom. Jeżeli udzielisz odpowiedzi na pytania przedstawimy Ci metodą statytyczną, jak Twoje poglądy pokrywają się z poglądami kandydatów. Twoje odpowiedzi są anoniowe i nie będą zapisane.",
